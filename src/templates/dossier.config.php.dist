@@ -1,0 +1,24 @@
+<?php
+// Copy this to dossier.config.php in your project root
+
+return [
+    'name' => 'Vision.8',
+
+    'ignore' => [
+        'vendor',
+        'node_modules',
+        '.git',
+        'storage',
+        'cache',
+        'logs',
+        'tests',
+    ],
+
+    'paths' => [
+        'controllers' => ['framework/Admin/Controllers/','framework/Root/Controllers','app/Admin/Controllers', 'app/Root/Controllers','framework/Generator/Controllers','framework/Generator/Generators'],
+        'services' => ['common/Services', 'framework/Generator/Services'],
+        'models' => ['common/Models'],
+        'views' => ['framework/Admin/Views/','framework/Root/Views','app/Admin/Views', 'app/Root/Views','framework/Generator/Views'],
+        'routes' => ['routes/web.php', 'routes/api.php','app/routes/route_map.php','app/routes/route_map_api.php'],
+    ],
+];
