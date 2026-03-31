@@ -1,128 +1,85 @@
 # Project Dossier & Audit 📂🤖
 ### The "Agent-First" Intelligence Toolkit for PHP Projects
 
-**Stop wasting tokens. Stop Agent confusion. Start shipping.**
+**Stop letting your AI guess your codebase. Give it a Mission Map.**
 
-Traditional project documentation is written for humans—it's wordy, lacks exact paths, and misses the structural "connective tissue" that AI Agents (like Gemini, Claude, or GPT) need to work effectively. 
+When an AI Coding Assistant (like Gemini, Claude, or GitHub Copilot) drops into a legacy PHP project, it starts playing hide-and-seek. It runs `find` commands, searches for routing files, and attempts to guess if your architecture uses Active Record or Doctrine. This "Discovery Phase" burns massive amounts of the AI's context window (the "Token Tax") and frequently leads to hallucinated paths and generic code that breaks your internal conventions.
 
-**Project Dossier** is a specialized toolkit designed to scan your codebase and generate high-signal, machine-readable intelligence. It transforms a messy directory into a precise "Mission Map" that an AI Agent can ingest in seconds to understand exactly where to go and what rules to follow.
-
----
-
-## 🧠 The "Agent-First" Philosophy
-
-Most documentation fails AI Agents in three ways:
-1. **Token Waste:** Agents spend 50% of their context window just "finding" files and running `ls` or `find` commands.
-2. **Hallucination:** Without exact paths and clear relationships, Agents guess folder structures and class locations.
-3. **Convention Breaking:** Agents often use generic patterns instead of your project's specific helpers or base classes.
-
-**This toolkit solves this by providing:**
-- **Machine-Readable Metadata:** Hidden JSON blocks at the top of every report for instant ingestion by LLMs.
-- **Symbol-to-Path Mapping:** Every class, model, and service is linked to its exact relative path (e.g., `UserController (framework/Admin/Controllers/UserController.php)`).
-- **Functional Lineage:** A "Trace Table" that maps `Route -> Controller -> View` in a single line, giving the agent a straight line to any feature.
-- **House Rules:** Automated detection of project-specific constraints (e.g., "Must extend BaseController" or "Use FormBuilder widgets").
+**Project Dossier** is a specialized, zero-dependency toolkit designed to scan your codebase and generate high-signal, machine-readable intelligence. It transforms a messy directory tree into a precise Mission Map that an AI Agent can ingest in seconds.
 
 ---
 
-## ✨ Key Features
+## 🧠 The Solution
 
-### 📋 generate:dossier
-Generates a comprehensive `PROJECT_DOSSIER.md` architecture map.
-- **Functional Lineage:** Instantly see which controller method and view template handle a specific route.
-- **Recursive Service Mapping:** Identifies all services and—crucially—who is calling them (Controllers, Twig templates, or other Services).
-- **Model Intelligence:** Distinguishes between Active Record (Eloquent) and Entity patterns, including relationship detection.
-- **Indented Tree Visualization:** A clear, hierarchical view of your project structure that preserves path context.
+Instead of standard, human-readable documentation, this toolkit generates explicitly for LLM consumption:
 
-### 🛡️ generate:audit
-Generates a high-signal `PROJECT_AUDIT.md` health and risk report.
-- **Risk Assessment Heatmap:** Identifies "dangerous" files based on cyclomatic complexity and lines of code (LOC).
-- **Agent Guidance:** Provides specific "House Rules" based on audit findings (e.g., "This project has Twig syntax errors; lint before every commit").
-- **Widget Usage Analysis:** Verifies if registered UI widgets are actually being utilized or if raw HTML is leaking into views.
-- **Security & Coverage:** Integrated `composer audit` and dependency vulnerability scanning.
+- **Machine-Readable Metadata:** Instant JSON headers so the agent understands scale and scope without thinking.
+- **The Trace Table:** Explicit `Route -> Controller -> View` functional lineage. No more guessing how features wire together.
+- **House Rules:** Automated extraction of architectural constraints (e.g., "Must extend BaseController").
+- **Agent Risk Heatmap:** Guides the AI away from highly complex, fragile files.
 
 ---
 
-## 🚀 Installation & Setup
+## 🚀 Quick Start
 
 ### Requirements
 - PHP 8.2+
 - Composer
 
-### Quick Start
-1. Clone the repository into your project's tool directory:
-   ```bash
-   git clone https://github.com/your-repo/project-dossier.git dossier
-   cd dossier && composer install
-   ```
-
-2. Generate your first Dossier:
-   ```bash
-   php src/bin/app.php generate:dossier /path/to/your/project -o PROJECT_DOSSIER.md
-   ```
-
-3. Run a Project Audit:
-   ```bash
-   php src/bin/app.php generate:audit /path/to/your/project -o PROJECT_AUDIT.md
-   ```
-
----
-
-## ⚙️ Configuration (`dossier.config.php`)
-
-For projects with non-standard structures, create a `dossier.config.php` in your project root. The toolkit will automatically detect this and adjust its scan paths:
-
-```php
-<?php
-return [
-    'name' => 'MyCustomApp',
-    'paths' => [
-        'controllers' => ['src/Http/Controllers', 'app/Legacy/Controllers'],
-        'services' => ['src/Domain/Services', 'common/Services'],
-        'models' => ['src/Domain/Models'],
-        'views' => ['resources/views', 'templates'],
-        'routes' => ['routes/web.php', 'routes/api.php', 'app/routes/map.php'],
-    ],
-    'ignore' => ['vendor', 'node_modules', '.git', 'storage', 'cache'],
-];
+### 1. Installation
+Clone the repository into your project's tool directory:
+```bash
+git clone https://github.com/your-repo/project-dossier.git dossier
+cd dossier && composer install
 ```
 
+### 2. Generate the Files
+Run the two generator commands against your target PHP project path:
+
+**Generate the Architecture Map:**
+```bash
+php src/bin/app.php generate:dossier /path/to/your/project -o PROJECT_DOSSIER.md
+```
+
+**Generate the Health & Risk Report:**
+```bash
+php src/bin/app.php generate:audit /path/to/your/project -o PROJECT_AUDIT.md
+```
+
+### 3. Generate via the Web GUI
+If you prefer not to use the terminal, you can generate reports via the beautifully styled, standalone Web GUI.
+1. Serve the Project Dossier directory via your local web environment (e.g., `http://localhost/dossier`).
+2. Visit `index.php` in your browser.
+3. Enter the absolute path to your target PHP project and click Generate! The scripts will execute and stream their output directly to a glassmorphic terminal in the UI.
+
+### 4. How to use with your AI
+1. Open your AI coding client of choice (Cursor, Gemini CLI, Claude Desktop).
+2. Attach both `PROJECT_DOSSIER.md` and `PROJECT_AUDIT.md` to your prompt.
+3. Use a prompt like: *"I have attached the Project Dossier mission maps. Following the documented House Rules and architectural trace table, please build a new Endpoint for resetting passwords."*
+4. Watch the AI build perfectly-suited code without running a single blind `ls` or `grep` command.
+
 ---
 
-## 📊 Output Deep Dive
+## ⚙️ Advanced Configuration & Deep Dive
 
-### The Functional Lineage Table
-The Dossier generates a "Trace Map" that allows an AI Agent to navigate features without running `grep`:
+If your application uses custom folder structures or bespoke routing logic, Project Dossier is highly configurable via a `dossier.config.php` file. 
 
-| Feature / Route | Controller Method | View Template |
-| :--- | :--- | :--- |
-| `/admin/users` | `UserController::index` | `admin/users/index.twig` |
-| `/api/v1/auth` | `AuthApiController::login` | `N/A` |
-
-### The Agent Risk Heatmap
-The Audit identifies where the "fragile" parts of your code are, setting boundaries for autonomous agents:
-
-| Risk Level | Factor | Guidance for AI Agents |
-| :--- | :--- | :--- |
-| 🔴 **High** | Complexity (> 200 LOC) | `BaseController.php` is fragile. Verify changes with a trial run. |
-| 🟠 **Medium** | Missing Type Hints | Some services lack return types. Check `common/Services` for implicit behaviors. |
-| 🟡 **Low** | Unused Widgets | Registered widgets like `DateWidget` are unused. Safe to refactor. |
+For complete instructions on configuring custom paths, interpreting the Trace Tables, and deep-diving into what exactly the AI is analyzing, please see the full **[DOCUMENTATION.md](./DOCUMENTATION.md)**.
 
 ---
 
-## 🛠️ Tool Fallback System
+## 🛠️ Zero-Dependency Fallback System
 
-The toolkit is designed to be **Zero-Dependency** for the target project. If the target project doesn't have the necessary tools installed, Dossier uses its own internal binaries located in its own `vendor/` directory:
-- **PHPStan:** For static analysis and type checking.
-- **PHPLOC:** For lines of code and complexity metrics.
-- **PHP-Parser:** For deep architectural and class-relationship analysis.
-- **Twig-Lint:** For template syntax verification.
+Project Dossier is completely decoupled from the system it analyzes. It ships with its own robust internal libraries located safely in its own `vendor/` directory, meaning it won't conflict with your target project's dependencies:
+- **PHPStan:** For static analysis.
+- **PHPLOC:** For complexity metrics.
+- **PHP-Parser:** For deep architectural mapping.
 
 ---
 
 ## 🗺️ Roadmap
 - [ ] **Laravel/Symfony Auto-Presets:** Zero-config support for major frameworks.
-- [ ] **Database Schema Ingestion:** Add table structures and field types to the Dossier models map.
-- [ ] **Agent Instruction Export:** Generate a `.cursorrules` or `.clinerules` file automatically.
+- [ ] **Database Schema Ingestion:** Add table structures to the Dossier models map.
 - [ ] **Graph Visualization:** Export Mermaid.js code for architectural and relationship diagrams.
 
 ## 🤝 Contributing
