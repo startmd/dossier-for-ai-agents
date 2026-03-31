@@ -86,4 +86,4 @@ Project Dossier is completely decoupled from the system it analyzes. It ships wi
 Contributions are welcome! If you find a pattern that isn't being detected or want to add support for a new framework, please open a PR.
 
 ---
-**Maintained by the Gemini CLI Community.**
+
