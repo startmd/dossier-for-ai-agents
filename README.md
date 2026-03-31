@@ -29,7 +29,7 @@ Instead of standard, human-readable documentation, this toolkit generates explic
 ### 1. Installation
 Clone the repository into your project's tool directory:
 ```bash
-git clone https://github.com/your-repo/project-dossier.git dossier
+git clone https://github.com/startmd/project-dossier.git dossier
 cd dossier && composer install
 ```
 
