@@ -1,6 +1,8 @@
 # Project Dossier & Audit 📂🤖
 ### The "Agent-First" Intelligence Toolkit for PHP Projects
 
+![terminal screenshot](https://startmd.net/uploads/posts/7c5ed1b5c13fe630.png)
+
 **Stop letting your AI guess your codebase. Give it a Mission Map.**
 
 When an AI Coding Assistant (like Gemini, Claude, or GitHub Copilot) drops into a legacy PHP project, it starts playing hide-and-seek. It runs `find` commands, searches for routing files, and attempts to guess if your architecture uses Active Record or Doctrine. This "Discovery Phase" burns massive amounts of the AI's context window (the "Token Tax") and frequently leads to hallucinated paths and generic code that breaks your internal conventions.
