@@ -1,7 +1,11 @@
 # Project Dossier & Audit 📂🤖
 ### The "Agent-First" Intelligence Toolkit for PHP Projects
 
+
+
 ![terminal screenshot](https://startmd.net/uploads/posts/7c5ed1b5c13fe630.png)
+
+
 
 **Stop letting your AI guess your codebase. Give it a Mission Map.**
 
